@@ -89,17 +89,19 @@ while True:
         continue
 
     distance, path = campus.find_shortest_path(start, end)
+    time_estimate = round(distance / 76, 2) #ave speed 76 m/mins.
 
     print(f"\nFastest path from {start} to {end}:")
     print(" => ".join(path))
     print(f"Total distance: {distance} meters")
+    print(f"Estimated Time: {time_estimate} minutes")
 
     while True:
         again = input("\nDo you want to find another path? (y/n): ").strip().lower()
         if again == "y":
             break
         elif again == "n":
-            print("Exiting Campus Way Finder. Goodbye!")
+            print("Exiting Campus Way Finder...")
             exit()
         else:
             print("Invalid input. Please type 'y' or 'n'.")
