@@ -88,8 +88,19 @@ while True:
         print("You are already at your destination!")
         continue
 
+    print("\nSelect speed options: ")
+    speed_options = {
+    "a": ("Tricycle", 166),
+    "b": ("Average walker", 76),
+    "c": ("Slow walker", 60)
+    }
+
+    print("\nSelect your walking speed:")
+    for key, (label, speed) in speed_options.items():
+        print(f"{key.upper()}.) {label} ({speed} m/min)")
+
     distance, path = campus.find_shortest_path(start, end)
-    time_estimate = round(distance / 76, 2) #ave speed 76 m/mins.
+    time_estimate = round(distance / speed, 2)
 
     print(f"\nFastest path from {start} to {end}:")
     print(" => ".join(path))
