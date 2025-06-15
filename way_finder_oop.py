@@ -74,8 +74,8 @@ def display_menu():
 
 while True: 
     display_menu()
-    start = input("\nEnter letter of your current location: ").strip()
-    end = input("Enter letter of your destination: ")
+    start = input("\nEnter letter of your current location: ").strip().lower()
+    end = input("Enter letter of your destination: ").strip().lower()
 
     if start not in location_menu and end not in location_menu:
         print("Location not found, try again\n")
@@ -85,7 +85,7 @@ while True:
     end = location_menu[end]
 
     if start == end:
-        print("⚠️ You are already at your destination!")
+        print("You are already at your destination!")
         continue
 
     distance, path = campus.find_shortest_path(start, end)
@@ -94,11 +94,12 @@ while True:
     print(" => ".join(path))
     print(f"Total distance: {distance} meters")
 
-    again = input("\nDo you want to find another path? (y/n): ").strip().lower()
-    if again != 'y':
-        print("Exiting Campus Way Finder. Goodbye!")
-        break
-
-        
-    
-
+    while True:
+        again = input("\nDo you want to find another path? (y/n): ").strip().lower()
+        if again == "y":
+            break
+        elif again == "n":
+            print("Exiting Campus Way Finder. Goodbye!")
+            exit()
+        else:
+            print("Invalid input. Please type 'y' or 'n'.")
