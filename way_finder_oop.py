@@ -99,6 +99,14 @@ while True:
     for key, (label, speed) in speed_options.items():
         print(f"{key.upper()}.) {label} ({speed} m/min)")
 
+    while True:
+        speed_choice = input("Enter your choice (a, b, or c): ").strip().lower()
+        if speed_choice in speed_options:
+            speed_label, walking_speed = speed_options[speed_choice]
+            break
+        else:
+            print("Invalid choice. Please select a, b, or c.")
+
     distance, path = campus.find_shortest_path(start, end)
     time_estimate = round(distance / speed, 2)
 
@@ -107,12 +115,15 @@ while True:
     print(f"Total distance: {distance} meters")
     print(f"Estimated Time: {time_estimate} minutes")
 
-    while True:
-        again = input("\nDo you want to find another path? (y/n): ").strip().lower()
-        if again == "y":
-            break
-        elif again == "n":
-            print("Exiting Campus Way Finder...")
-            exit()
-        else:
-            print("Invalid input. Please type 'y' or 'n'.")
+    if not path or distance == float("inf"):
+        print("No valid path found between those locations.")
+    else:
+        while True:
+            again = input("\nDo you want to find another path? (y/n): ").strip().lower()
+            if again == "y":
+                break
+            elif again == "n":
+                print("Exiting Campus Way Finder...")
+                exit()
+            else:
+                print("Invalid input. Please type 'y' or 'n'.")
