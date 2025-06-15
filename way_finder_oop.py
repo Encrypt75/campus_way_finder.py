@@ -59,14 +59,46 @@ paths = [
 for from_loc, to_loc, distance in paths:
     campus.add_path(from_loc, to_loc, distance)
 
- 
-start = input("Enter your current location: ").strip()
-end = input("Enter your destination: ").strip()
+location_menu = {
+    "a": "Main",
+    "b": "COC",
+    "c": "CEA",
+    "d": "I-Tech",
+    "e": "Hasmine"
+}
 
-if start in campus.graph and end in campus.graph:
-    dist, route = campus.find_shortest_path(start, end)
-    print(f"\ntake route from {start} to {end}:")
-    print(" => ".join(route))
-    print(f"total distance: {dist} meters")
-else:
-    print("One or both locations not found.")
+def display_menu():
+    print("Locations: ")
+    for key, name in location_menu.items():
+        print(f"{key}. {name}")
+
+while True: 
+    display_menu()
+    start = input("\nEnter letter of your current location: ").strip()
+    end = input("Enter letter of your destination: ")
+
+    if start not in location_menu and end not in location_menu:
+        print("Location not found, try again\n")
+        continue
+
+    start = location_menu[start]
+    end = location_menu[end]
+
+    if start == end:
+        print("⚠️ You are already at your destination!")
+        continue
+
+    distance, path = campus.find_shortest_path(start, end)
+
+    print(f"\nFastest path from {start} to {end}:")
+    print(" => ".join(path))
+    print(f"Total distance: {distance} meters")
+
+    again = input("\nDo you want to find another path? (y/n): ").strip().lower()
+    if again != 'y':
+        print("Exiting Campus Way Finder. Goodbye!")
+        break
+
+        
+    
+
