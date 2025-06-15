@@ -10,13 +10,13 @@ scale = min(MAX_WIDTH / original_image.width, MAX_HEIGHT / original_image.height
 new_size = (int(original_image.width * scale), int(original_image.height * scale))
 resized_image = original_image.resize(new_size, Image.Resampling.LANCZOS)
 
-# Coordinates scaled to resized image
+# Coordinates (x, y)
 location_coords = {
-    "Main": (500, 100),
-    "CEA": (350, 250),
-    "COC": (200, 300),
-    "I-Tech": (600, 350),
-    "Hasmine": (800, 500)
+    "Main": (815, 428),
+    "CEA": (345, 350),
+    "COC": (470, 355),
+    "I-Tech": (250, 300),
+    "Hasmine": (50, 200)
 }
 
 # Draw on the image
@@ -29,7 +29,7 @@ for name, (x, y) in location_coords.items():
 
 # Create window and canvas
 root = tk.Tk()
-root.title("Campus Map with Pins")
+root.title("Campus Map")
 root.geometry(f"{new_size[0]}x{new_size[1]}")
 
 # Convert to Tkinter image
